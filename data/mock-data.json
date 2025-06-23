@@ -1,0 +1,258 @@
+{
+  "employers": [
+    {
+      "id": "emp_001",
+      "name": "TechCorp Solutions",
+      "address": "123 Business Way, Fort Wayne, IN 46802",
+      "phone": "(260) 555-0101",
+      "email": "hr@techcorp.com",
+      "contacts": {
+        "main": "Sarah Johnson",
+        "hr": "Mike Peterson",
+        "billing": "Lisa Chen"
+      },
+      "programType": "both",
+      "coShareType": "percentage",
+      "coShareAmount": 20,
+      "status": "active",
+      "employeeCount": 245,
+      "participatingEmployees": 23
+    },
+    {
+      "id": "emp_002",
+      "name": "Dekalb YMCA",
+      "address": "456 Community St, Auburn, IN 46706",
+      "phone": "(260) 555-0202",
+      "email": "admin@dekalbymca.org",
+      "contacts": {
+        "main": "Jennifer Williams",
+        "hr": "Tom Bradley",
+        "billing": "Karen Smith"
+      },
+      "programType": "tri-share",
+      "status": "active",
+      "employeeCount": 89,
+      "participatingEmployees": 12,
+      "isProvider": true
+    },
+    {
+      "id": "emp_003",
+      "name": "Manufacturing Plus Inc",
+      "address": "789 Industrial Blvd, Huntington, IN 46750",
+      "phone": "(260) 555-0303",
+      "email": "benefits@mfgplus.com",
+      "contacts": {
+        "main": "Robert Davis",
+        "hr": "Angela Martinez",
+        "billing": "David Wilson"
+      },
+      "programType": "co-share",
+      "coShareType": "flat",
+      "coShareAmount": 100,
+      "status": "active",
+      "employeeCount": 156,
+      "participatingEmployees": 31
+    }
+  ],
+  "providers": [
+    {
+      "id": "prov_001",
+      "name": "Little Stars Learning Center",
+      "address": "321 Childcare Ave, Fort Wayne, IN 46805",
+      "phone": "(260) 555-1001",
+      "email": "director@littlestars.com",
+      "licenseNumber": "LC-2024-001",
+      "providerType": "licensed_center",
+      "contacts": {
+        "director": "Mary Thompson",
+        "billing": "Susan Rodriguez"
+      },
+      "capacity": 120,
+      "currentEnrollment": 95,
+      "status": "active",
+      "weeklyRates": {
+        "infant": 185,
+        "toddler": 165,
+        "preschool": 145,
+        "schoolAge": 125
+      }
+    },
+    {
+      "id": "prov_002",
+      "name": "Happy Tots Family Daycare",
+      "address": "654 Residential Dr, Auburn, IN 46706",
+      "phone": "(260) 555-1002",
+      "email": "care@happytots.com",
+      "licenseNumber": "LH-2024-002",
+      "providerType": "licensed_home",
+      "contacts": {
+        "director": "Patricia Lee",
+        "billing": "Patricia Lee"
+      },
+      "capacity": 12,
+      "currentEnrollment": 8,
+      "status": "active",
+      "weeklyRates": {
+        "infant": 160,
+        "toddler": 145,
+        "preschool": 130,
+        "schoolAge": 110
+      }
+    },
+    {
+      "id": "prov_003",
+      "name": "Dekalb YMCA Childcare",
+      "address": "456 Community St, Auburn, IN 46706",
+      "phone": "(260) 555-0202",
+      "email": "childcare@dekalbymca.org",
+      "licenseNumber": "LC-2024-003",
+      "providerType": "licensed_center",
+      "contacts": {
+        "director": "Jennifer Williams",
+        "billing": "Karen Smith"
+      },
+      "capacity": 75,
+      "currentEnrollment": 62,
+      "status": "active",
+      "isEmployer": true,
+      "employerId": "emp_002",
+      "weeklyRates": {
+        "infant": 175,
+        "toddler": 155,
+        "preschool": 135,
+        "schoolAge": 115
+      }
+    }
+  ],
+  "applications": [
+    {
+      "id": "app_001",
+      "employeeId": "emp_001_e001",
+      "employerId": "emp_001",
+      "providerId": "prov_001",
+      "status": "approved_participating",
+      "submittedDate": "2024-01-15",
+      "approvedDate": "2024-01-22",
+      "programType": "tri-share",
+      "householdInfo": {
+        "annualIncome": 52000,
+        "familySize": 4,
+        "adults": 2,
+        "children": 2
+      },
+      "employee": {
+        "firstName": "Jessica",
+        "lastName": "Anderson",
+        "email": "j.anderson@email.com",
+        "phone": "(260) 555-2001",
+        "employerId": "emp_001"
+      },
+      "children": [
+        {
+          "name": "Emma Anderson",
+          "age": 3,
+          "ageGroup": "preschool",
+          "weeklyChildcareCost": 145,
+          "sdcContribution": 58,
+          "employerContribution": 29,
+          "employeeContribution": 58
+        },
+        {
+          "name": "Liam Anderson",
+          "age": 1,
+          "ageGroup": "infant",
+          "weeklyChildcareCost": 185,
+          "sdcContribution": 74,
+          "employerContribution": 37,
+          "employeeContribution": 74
+        }
+      ],
+      "totalWeeklyCost": 330,
+      "totalSDC": 132,
+      "totalEmployer": 66,
+      "totalEmployee": 132,
+      "assignedStaff": "admin_001",
+      "notes": "Family qualified for full tri-share benefits. Both children enrolled at Little Stars."
+    },
+    {
+      "id": "app_002",
+      "employeeId": "emp_003_e002",
+      "employerId": "emp_003",
+      "providerId": "prov_002",
+      "status": "pending",
+      "submittedDate": "2024-02-10",
+      "programType": "co-share",
+      "householdInfo": {
+        "annualIncome": 45000,
+        "familySize": 3,
+        "adults": 2,
+        "children": 1
+      },
+      "employee": {
+        "firstName": "Michael",
+        "lastName": "Brown",
+        "email": "m.brown@email.com",
+        "phone": "(260) 555-2002",
+        "employerId": "emp_003"
+      },
+      "children": [
+        {
+          "name": "Sophia Brown",
+          "age": 2,
+          "ageGroup": "toddler",
+          "weeklyChildcareCost": 145,
+          "employerContribution": 100,
+          "employeeContribution": 45
+        }
+      ],
+      "totalWeeklyCost": 145,
+      "totalEmployer": 100,
+      "totalEmployee": 45,
+      "assignedStaff": "admin_002",
+      "notes": "Pending income verification. Documents uploaded."
+    }
+  ],
+  "adminUsers": [
+    {
+      "id": "admin_001",
+      "name": "Amanda Miller",
+      "email": "a.miller@neiecc.org",
+      "role": "Case Manager",
+      "assignedApplications": ["app_001"],
+      "permissions": ["applications", "providers", "reporting"]
+    },
+    {
+      "id": "admin_002",
+      "name": "James Wilson",
+      "email": "j.wilson@neiecc.org",
+      "role": "Program Coordinator",
+      "assignedApplications": ["app_002"],
+      "permissions": ["applications", "employers", "providers", "billing", "reporting"]
+    }
+  ],
+  "statusOptions": [
+    "pending",
+    "in_process",
+    "income_verified_pending_provider",
+    "approved_not_participating",
+    "denied",
+    "approved_participating",
+    "approved_waitlisted",
+    "not_eligible",
+    "incomplete_application",
+    "inactive_approved"
+  ],
+  "providerTypes": [
+    "licensed_center",
+    "registered_ministry", 
+    "licensed_home",
+    "school_based",
+    "other"
+  ],
+  "ageGroups": [
+    "infant",
+    "toddler", 
+    "preschool",
+    "schoolAge"
+  ]
+}

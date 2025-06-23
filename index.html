@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEIECC Tri-Share/Co-Share Portal</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <a href="#" data-role="landing">
+                    <img src="https://www.neiecc.org/images/logo.png" alt="" width="200">
+                </a>
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-link" id="logout-btn" style="display: none;">Logout</a>
+            </nav>
+        </header>
+
+        <main class="main">
+            <!-- Landing Page -->
+            <div id="landing-page" class="page active">
+                <div class="hero">
+                    <h2>Welcome to the Tri-Share & Co-Share Child Care Portal</h2>
+                    <p>Supporting families and employers with affordable child care solutions</p>
+                    <a href="https://neiecc.org" target="_blank" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
+                </div>
+
+                <div class="lookup-section">
+                    <div class="lookup-cards">
+                        <div class="lookup-card">
+                            <div class="card-icon">🏫</div>
+                            <h4>Participating Childcare Provider Lookup</h4>
+                            <p>Find participating child care providers in your area</p>
+                            <div class="lookup-form">
+                                <input type="text" placeholder="Enter city or zip code" class="form-control lookup-input">
+                                <button class="btn btn-secondary" onclick="window.app.searchProviders()">Search Providers</button>
+                            </div>
+
+                            <div class="browse-all-section">
+                                <a href="#" class="browse-all-link" onclick="window.app.browseAllProviders(); return false;">Browse All Providers</a>
+                            </div>
+                        </div>
+
+                        <div class="lookup-card">
+                            <div class="card-icon">🏢</div>
+                            <h4>Participating Employer Lookup</h4>
+                            <p>Check if your employer participates in the program</p>
+                            <div class="lookup-form">
+                                <input type="text" placeholder="Enter company name" class="form-control lookup-input">
+                                <button class="btn btn-secondary" onclick="window.app.searchEmployers()">Search Employers</button>
+                            </div>
+
+                            <div class="browse-all-section">
+                                <a href="#" class="browse-all-link" onclick="window.app.browseAllEmployers(); return false;">Browse All Employers</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portal-selection">
+                    <h3>Select Your Portal</h3>
+                    <div class="portal-cards">
+                        <div class="portal-card" data-portal="employee">
+                            <div class="card-icon">👨‍👩‍👧‍👦</div>
+                            <h4>Family Login</h4>
+                            <p>Apply for child care assistance and manage your enrollment</p>
+                            <button class="btn btn-primary">Access Family Portal</button>
+                        </div>
+
+                        <div class="portal-card" data-portal="employer">
+                            <div class="card-icon">🏢</div>
+                            <h4>Employer Login</h4>
+                            <p>Manage company participation and employee benefits</p>
+                            <button class="btn btn-primary">Access Employer Portal</button>
+                        </div>
+
+                        <div class="portal-card" data-portal="provider">
+                            <div class="card-icon">🏫</div>
+                            <h4>Care Provider Login</h4>
+                            <p>Enroll in the system and submit billing</p>
+                            <button class="btn btn-primary">Access Provider Portal</button>
+                        </div>
+
+                        <div class="portal-card" data-portal="admin">
+                            <div class="card-icon">⚙️</div>
+                            <h4>Admin Login</h4>
+                            <p>Manage applications, approvals, and reporting</p>
+                            <button class="btn btn-primary">Access Admin Portal</button>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+
+            <!-- Employee Portal -->
+            <div id="employee-portal" class="page">
+                <div class="portal-header">
+                    <h2>Employee Portal</h2>
+                    <p>Apply for child care assistance and manage your enrollment</p>
+                </div>
+                <!-- Employee portal content will be loaded here -->
+            </div>
+
+            <!-- Employer Dashboard -->
+            <div id="employer-portal" class="page">
+                <div class="portal-header">
+                    <h2>Employer Dashboard</h2>
+                    <p>Manage company participation and employee benefits</p>
+                </div>
+                <!-- Employer portal content will be loaded here -->
+            </div>
+
+            <!-- Provider Portal -->
+            <div id="provider-portal" class="page">
+                <div class="portal-header">
+                    <h2>Child Care Provider Portal</h2>
+                    <p>Enroll in the system and submit billing</p>
+                </div>
+                <!-- Provider portal content will be loaded here -->
+            </div>
+
+            <!-- Admin Dashboard -->
+            <div id="admin-portal" class="page">
+                <div class="portal-header">
+                    <h2>Admin Dashboard</h2>
+                    <p>Manage applications, approvals, and reporting</p>
+                </div>
+                <!-- Admin portal content will be loaded here -->
+            </div>
+
+            <!-- Provider Search Results -->
+            <div id="provider-results" class="page">
+                <div class="results-header">
+                    <button class="btn btn-secondary back-to-home" onclick="window.app.showPortal('landing')">← Back to Home</button>
+                    <h2 id="provider-results-title">Child Care Providers</h2>
+                    <p id="provider-results-subtitle">Participating providers in your area</p>
+                </div>
+                <div id="provider-results-grid" class="results-grid">
+                    <!-- Provider results will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Employer Search Results -->
+            <div id="employer-results" class="page">
+                <div class="results-header">
+                    <button class="btn btn-secondary back-to-home" onclick="window.app.showPortal('landing')">← Back to Home</button>
+                    <h2 id="employer-results-title">Participating Employers</h2>
+                    <p id="employer-results-subtitle">Employers participating in the program</p>
+                </div>
+                <div id="employer-results-grid" class="results-grid">
+                    <!-- Employer results will be loaded here -->
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Northeast Indiana Early Childhood Coalition. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/employee.js"></script>
+    <script src="js/employer.js"></script>
+    <script src="js/provider.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
