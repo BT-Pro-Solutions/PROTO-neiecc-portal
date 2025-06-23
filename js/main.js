@@ -48,8 +48,18 @@ class NEIECCPortal {
             page.classList.remove('active');
         });
 
-        // Show selected page
-        const targetPage = document.getElementById(`${portalName}-portal`) || document.getElementById('landing-page');
+        // Show selected page - handle both portal pages and results pages
+        let targetPage;
+        if (portalName === 'landing') {
+            targetPage = document.getElementById('landing-page');
+        } else if (portalName.includes('-results')) {
+            // Handle results pages (provider-results, employer-results)
+            targetPage = document.getElementById(portalName);
+        } else {
+            // Handle portal pages (employee-portal, etc.)
+            targetPage = document.getElementById(`${portalName}-portal`);
+        }
+        
         if (targetPage) {
             targetPage.classList.add('active');
         }
@@ -61,9 +71,11 @@ class NEIECCPortal {
 
         // Show/hide logout button
         const logoutBtn = document.getElementById('logout-btn');
-        if (portalName === 'landing') {
+        if (portalName === 'landing' || portalName.includes('-results')) {
+            // Hide logout button on landing page and results pages (public pages)
             logoutBtn.style.display = 'none';
         } else {
+            // Show logout button on portal pages (authenticated pages)
             logoutBtn.style.display = 'inline-block';
         }
 
@@ -131,14 +143,10 @@ class NEIECCPortal {
             const response = await fetch('./data/mock-data.json');
             const mockData = await response.json();
             
-            // Filter providers by location
-            const results = mockData.providers.filter(provider => 
-                provider.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                provider.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                provider.zipCode.includes(searchTerm)
-            );
-
-            this.displaySearchResults('Participating Child Care Providers', results, 'provider');
+            // For demo purposes, show all providers with search term
+            const results = this.generateProviderResults(mockData.providers, searchTerm);
+            
+            this.showProviderResults(results, `Child Care Providers - "${searchTerm}"`, true);
         } catch (error) {
             NEIECCPortal.showNotification('Error searching providers', 'error');
         }
@@ -158,113 +166,294 @@ class NEIECCPortal {
             const response = await fetch('./data/mock-data.json');
             const mockData = await response.json();
             
-            // Filter employers by name
-            const results = mockData.employers.filter(employer => 
-                employer.name.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-
-            this.displaySearchResults('Participating Employers', results, 'employer');
+            // For demo purposes, show all employers with search term
+            const results = this.generateEmployerResults(mockData.employers, searchTerm);
+            
+            this.showEmployerResults(results, `Participating Employers - "${searchTerm}"`);
         } catch (error) {
             NEIECCPortal.showNotification('Error searching employers', 'error');
         }
     }
 
-    displaySearchResults(title, results, type) {
-        // Create modal for results
-        const modal = document.createElement('div');
-        modal.className = 'search-modal';
-        modal.innerHTML = `
-            <div class="search-modal-content">
-                <div class="search-modal-header">
-                    <h3>${title}</h3>
-                    <button class="search-modal-close" onclick="this.closest('.search-modal').remove()">&times;</button>
+    async browseAllProviders() {
+        try {
+            // Load mock data
+            const response = await fetch('./data/mock-data.json');
+            const mockData = await response.json();
+            
+            // Generate more providers for demo
+            const results = this.generateProviderResults(mockData.providers);
+            
+            this.showProviderResults(results, 'All Participating Child Care Providers', false);
+        } catch (error) {
+            NEIECCPortal.showNotification('Error loading providers', 'error');
+        }
+    }
+
+    async browseAllEmployers() {
+        try {
+            // Load mock data
+            const response = await fetch('./data/mock-data.json');
+            const mockData = await response.json();
+            
+            // Generate more employers for demo
+            const results = this.generateEmployerResults(mockData.employers);
+            
+            this.showEmployerResults(results, 'All Participating Employers');
+        } catch (error) {
+            NEIECCPortal.showNotification('Error loading employers', 'error');
+        }
+    }
+
+    generateProviderResults(baseProviders, searchTerm = null) {
+        // Generate additional demo providers
+        const additionalProviders = [
+            {
+                name: "Sunshine Kids Academy",
+                address: "789 Oak Street",
+                city: "Fort Wayne",
+                zipCode: "46802",
+                phone: "(260) 555-1003",
+                website: "www.sunshinekids.com",
+                providerType: "licensed_center",
+                capacity: 90,
+                ageGroups: ["infant", "toddler", "preschool"]
+            },
+            {
+                name: "Rainbow Bridge Daycare",
+                address: "456 Maple Ave",
+                city: "Auburn",
+                zipCode: "46706",
+                phone: "(260) 555-1004",
+                website: "www.rainbowbridge.org",
+                providerType: "licensed_center",
+                capacity: 60,
+                ageGroups: ["toddler", "preschool", "school-age"]
+            },
+            {
+                name: "Tiny Tots Family Care",
+                address: "123 Pine Lane",
+                city: "Huntington",
+                zipCode: "46750",
+                phone: "(260) 555-1005",
+                website: "www.tinytots.net",
+                providerType: "licensed_home",
+                capacity: 14,
+                ageGroups: ["infant", "toddler"]
+            },
+            {
+                name: "Adventure Learning Center",
+                address: "321 Elm Street",
+                city: "Columbia City",
+                zipCode: "46725",
+                phone: "(260) 555-1006",
+                website: "www.adventure-learning.com",
+                providerType: "licensed_center",
+                capacity: 110,
+                ageGroups: ["infant", "toddler", "preschool", "school-age"]
+            },
+            {
+                name: "Little Angels Preschool",
+                address: "654 Cedar Drive",
+                city: "Garrett",
+                zipCode: "46738",
+                phone: "(260) 555-1007",
+                website: "www.littleangels.edu",
+                providerType: "licensed_center",
+                capacity: 45,
+                ageGroups: ["preschool", "school-age"]
+            }
+        ];
+
+        // Combine base providers with additional ones
+        const allProviders = [...baseProviders, ...additionalProviders];
+        
+        // Add distance for demo purposes when searching
+        return allProviders.map((provider, index) => ({
+            ...provider,
+            // Add missing fields for demo
+            address: provider.address || `${Math.floor(Math.random() * 999) + 100} Sample St`,
+            city: provider.city || "Fort Wayne",
+            zipCode: provider.zipCode || "46802",
+            website: provider.website || `www.${provider.name.toLowerCase().replace(/\s+/g, '')}.com`,
+            distance: searchTerm ? `${(Math.random() * 10 + 1).toFixed(1)} mi` : null,
+            ageGroups: provider.ageGroups || ["infant", "toddler", "preschool"]
+        }));
+    }
+
+    generateEmployerResults(baseEmployers, searchTerm = null) {
+        // Generate additional demo employers
+        const additionalEmployers = [
+            {
+                name: "Fort Wayne Community Schools",
+                address: "1200 S Clinton St, Fort Wayne, IN 46802",
+                phone: "(260) 467-1000",
+                programType: "tri-share",
+                employeeCount: 2800,
+                participatingEmployees: 156,
+                industry: "Education"
+            },
+            {
+                name: "Auburn Memorial Hospital",
+                address: "401 E 7th St, Auburn, IN 46706",
+                phone: "(260) 925-4600",
+                programType: "co-share",
+                employeeCount: 450,
+                participatingEmployees: 34,
+                industry: "Healthcare"
+            },
+            {
+                name: "Steel Dynamics Inc",
+                address: "7575 W Jefferson Blvd, Fort Wayne, IN 46804",
+                phone: "(260) 969-3500",
+                programType: "both",
+                employeeCount: 1250,
+                participatingEmployees: 87,
+                industry: "Manufacturing"
+            },
+            {
+                name: "Sweetwater Sound",
+                address: "5501 US Hwy 30 W, Fort Wayne, IN 46818",
+                phone: "(260) 432-8176",
+                programType: "co-share",
+                employeeCount: 1800,
+                participatingEmployees: 123,
+                industry: "Technology/Retail"
+            },
+            {
+                name: "Parkview Health System",
+                address: "11109 Parkview Plaza Dr, Fort Wayne, IN 46845",
+                phone: "(260) 266-1000",
+                programType: "tri-share",
+                employeeCount: 3200,
+                participatingEmployees: 234,
+                industry: "Healthcare"
+            }
+        ];
+
+        // Combine base employers with additional ones
+        const allEmployers = [...baseEmployers, ...additionalEmployers];
+        
+        return allEmployers.map(employer => ({
+            ...employer,
+            // Add missing fields for demo
+            industry: employer.industry || "Business Services",
+            employeeCount: employer.employeeCount || Math.floor(Math.random() * 500) + 50,
+            participatingEmployees: employer.participatingEmployees || Math.floor(Math.random() * 30) + 5
+        }));
+    }
+
+    showProviderResults(providers, title, showDistance = false) {
+        // Update page title and subtitle
+        document.getElementById('provider-results-title').textContent = title;
+        document.getElementById('provider-results-subtitle').textContent = 
+            showDistance ? 'Providers near your search location' : 'All participating providers in the network';
+        
+        // Generate provider cards
+        const grid = document.getElementById('provider-results-grid');
+        grid.innerHTML = providers.map(provider => this.createProviderCard(provider, showDistance)).join('');
+        
+        // Show the results page
+        this.showPortal('provider-results');
+    }
+
+    showEmployerResults(employers, title) {
+        // Update page title and subtitle
+        document.getElementById('employer-results-title').textContent = title;
+        document.getElementById('employer-results-subtitle').textContent = 
+            'Companies offering child care benefits to employees';
+        
+        // Generate employer cards
+        const grid = document.getElementById('employer-results-grid');
+        grid.innerHTML = employers.map(employer => this.createEmployerCard(employer)).join('');
+        
+        // Show the results page
+        this.showPortal('employer-results');
+    }
+
+    createProviderCard(provider, showDistance = false) {
+        const distanceHtml = showDistance && provider.distance ? 
+            `<span class="provider-distance">${provider.distance}</span>` : '';
+        
+        const websiteHtml = provider.website ? 
+            `<div class="provider-info-item">
+                <i>🌐</i>
+                <a href="http://${provider.website}" target="_blank">${provider.website}</a>
+            </div>` : '';
+
+        return `
+            <div class="provider-card">
+                <div class="provider-header">
+                    <h3 class="provider-name">${provider.name}</h3>
+                    ${distanceHtml}
                 </div>
-                <div class="search-modal-body">
-                    ${results.length === 0 ? 
-                        '<p>No results found. Please try a different search term.</p>' :
-                        results.map(item => this.formatSearchResult(item, type)).join('')
-                    }
+                <div class="provider-info">
+                    <div class="provider-info-item">
+                        <i>📍</i>
+                        <span>${provider.address}, ${provider.city} ${provider.zipCode}</span>
+                    </div>
+                    <div class="provider-info-item">
+                        <i>📞</i>
+                        <a href="tel:${provider.phone}">${provider.phone}</a>
+                    </div>
+                    ${websiteHtml}
+                    <div class="provider-info-item">
+                        <i>👶</i>
+                        <span>Ages: ${provider.ageGroups ? provider.ageGroups.join(', ') : 'All ages'}</span>
+                    </div>
+                    <div class="provider-info-item">
+                        <i>🏫</i>
+                        <span>Capacity: ${provider.capacity || 'Contact for info'} children</span>
+                    </div>
+                </div>
+                <div class="provider-actions">
+                    <button class="btn btn-primary" onclick="NEIECCPortal.showNotification('Contact info displayed above', 'info')">Contact</button>
+                    <button class="btn btn-secondary" onclick="NEIECCPortal.showNotification('More details would be available in full system', 'info')">View Details</button>
                 </div>
             </div>
         `;
-
-        document.body.appendChild(modal);
-
-        // Add modal styles
-        modal.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        `;
-
-        modal.querySelector('.search-modal-content').style.cssText = `
-            background: white;
-            border-radius: 8px;
-            max-width: 800px;
-            max-height: 80vh;
-            overflow-y: auto;
-            margin: 20px;
-            width: 100%;
-        `;
-
-        modal.querySelector('.search-modal-header').style.cssText = `
-            padding: 1rem 2rem;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        `;
-
-        modal.querySelector('.search-modal-close').style.cssText = `
-            background: none;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #999;
-        `;
-
-        modal.querySelector('.search-modal-body').style.cssText = `
-            padding: 2rem;
-        `;
-
-        // Close on background click
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.remove();
-            }
-        });
     }
 
-    formatSearchResult(item, type) {
-        if (type === 'provider') {
-            return `
-                <div class="search-result">
-                    <h4>${item.name}</h4>
-                    <p><strong>Address:</strong> ${item.address}, ${item.city} ${item.zipCode}</p>
-                    <p><strong>Phone:</strong> ${item.phone}</p>
-                    <p><strong>Type:</strong> ${item.providerType.replace(/_/g, ' ')}</p>
-                    <p><strong>Capacity:</strong> ${item.capacity} children</p>
-                    <p><strong>Ages Served:</strong> ${Object.keys(item.weeklyRates).join(', ')}</p>
+    createEmployerCard(employer) {
+        const programTypeDisplay = employer.programType === 'both' ? 'Tri-Share & Co-Share' : 
+                                 employer.programType === 'tri-share' ? 'Tri-Share' : 'Co-Share';
+        
+        return `
+            <div class="employer-card">
+                <div class="employer-header">
+                    <h3 class="employer-name">${employer.name}</h3>
+                    <span class="employer-program">${programTypeDisplay}</span>
                 </div>
-            `;
-        } else if (type === 'employer') {
-            return `
-                <div class="search-result">
-                    <h4>${item.name}</h4>
-                    <p><strong>Industry:</strong> ${item.industry}</p>
-                    <p><strong>Program:</strong> ${item.programType}</p>
-                    <p><strong>Employees:</strong> ${item.totalEmployees}</p>
-                    <p><strong>Participating Since:</strong> ${NEIECCPortal.formatDate(item.joinDate)}</p>
+                <div class="employer-info">
+                    <div class="employer-info-item">
+                        <i>📍</i>
+                        <span>${employer.address}</span>
+                    </div>
+                    <div class="employer-info-item">
+                        <i>📞</i>
+                        <a href="tel:${employer.phone}">${employer.phone}</a>
+                    </div>
+                    <div class="employer-info-item">
+                        <i>🏢</i>
+                        <span>Industry: ${employer.industry}</span>
+                    </div>
                 </div>
-            `;
-        }
+                <div class="employer-stats">
+                    <div class="employer-stat">
+                        <span class="employer-stat-number">${employer.employeeCount.toLocaleString()}</span>
+                        <span class="employer-stat-label">Total Employees</span>
+                    </div>
+                    <div class="employer-stat">
+                        <span class="employer-stat-number">${employer.participatingEmployees}</span>
+                        <span class="employer-stat-label">Participating</span>
+                    </div>
+                    <div class="employer-stat">
+                        <span class="employer-stat-number">${Math.round((employer.participatingEmployees / employer.employeeCount) * 100)}%</span>
+                        <span class="employer-stat-label">Participation Rate</span>
+                    </div>
+                </div>
+            </div>
+        `;
     }
 
     // Utility methods

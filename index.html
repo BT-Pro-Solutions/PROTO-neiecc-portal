@@ -10,11 +10,11 @@
     <div class="container">
         <header class="header">
             <div class="logo">
-                <h1>NEIECC</h1>
-                <p>Northeast Indiana Early Childhood Coalition</p>
+                <a href="#" data-role="landing">
+                    <img src="https://www.neiecc.org/images/logo.png" alt="" width="200">
+                </a>
             </div>
             <nav class="nav">
-                <a href="#" class="nav-link active" data-role="landing">Home</a>
                 <a href="#" class="nav-link" id="logout-btn" style="display: none;">Logout</a>
             </nav>
         </header>
@@ -25,6 +25,7 @@
                 <div class="hero">
                     <h2>Welcome to the Tri-Share & Co-Share Child Care Portal</h2>
                     <p>Supporting families and employers with affordable child care solutions</p>
+                    <a href="https://neiecc.org" target="_blank" class="btn btn-primary" style="margin-top: 1rem;">Learn More</a>
                 </div>
 
                 <div class="lookup-section">
@@ -37,6 +38,10 @@
                                 <input type="text" placeholder="Enter city or zip code" class="form-control lookup-input">
                                 <button class="btn btn-secondary" onclick="window.app.searchProviders()">Search Providers</button>
                             </div>
+
+                            <div class="browse-all-section">
+                                <a href="#" class="browse-all-link" onclick="window.app.browseAllProviders(); return false;">Browse All Providers</a>
+                            </div>
                         </div>
 
                         <div class="lookup-card">
@@ -46,6 +51,10 @@
                             <div class="lookup-form">
                                 <input type="text" placeholder="Enter company name" class="form-control lookup-input">
                                 <button class="btn btn-secondary" onclick="window.app.searchEmployers()">Search Employers</button>
+                            </div>
+
+                            <div class="browse-all-section">
+                                <a href="#" class="browse-all-link" onclick="window.app.browseAllEmployers(); return false;">Browse All Employers</a>
                             </div>
                         </div>
                     </div>
@@ -70,7 +79,7 @@
 
                         <div class="portal-card" data-portal="provider">
                             <div class="card-icon">🏫</div>
-                            <h4>Child Care Provider Login</h4>
+                            <h4>Care Provider Login</h4>
                             <p>Enroll in the system and submit billing</p>
                             <button class="btn btn-primary">Access Provider Portal</button>
                         </div>
@@ -141,6 +150,30 @@
                     <p>Manage applications, approvals, and reporting</p>
                 </div>
                 <!-- Admin portal content will be loaded here -->
+            </div>
+
+            <!-- Provider Search Results -->
+            <div id="provider-results" class="page">
+                <div class="results-header">
+                    <button class="btn btn-secondary back-to-home" onclick="window.app.showPortal('landing')">← Back to Home</button>
+                    <h2 id="provider-results-title">Child Care Providers</h2>
+                    <p id="provider-results-subtitle">Participating providers in your area</p>
+                </div>
+                <div id="provider-results-grid" class="results-grid">
+                    <!-- Provider results will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Employer Search Results -->
+            <div id="employer-results" class="page">
+                <div class="results-header">
+                    <button class="btn btn-secondary back-to-home" onclick="window.app.showPortal('landing')">← Back to Home</button>
+                    <h2 id="employer-results-title">Participating Employers</h2>
+                    <p id="employer-results-subtitle">Employers participating in the program</p>
+                </div>
+                <div id="employer-results-grid" class="results-grid">
+                    <!-- Employer results will be loaded here -->
+                </div>
             </div>
         </main>
 
