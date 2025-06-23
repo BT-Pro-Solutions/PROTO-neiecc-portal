@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEIECC Tri-Share/Co-Share Portal</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1>NEIECC</h1>
+                <p>Northeast Indiana Early Childhood Coalition</p>
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-link active" data-role="landing">Home</a>
+                <a href="#" class="nav-link" id="logout-btn" style="display: none;">Logout</a>
+            </nav>
+        </header>
+
+        <main class="main">
+            <!-- Landing Page -->
+            <div id="landing-page" class="page active">
+                <div class="hero">
+                    <h2>Welcome to the Tri-Share & Co-Share Child Care Portal</h2>
+                    <p>Supporting families and employers with affordable child care solutions</p>
+                </div>
+
+                <div class="portal-selection">
+                    <h3>Select Your Portal</h3>
+                    <div class="portal-cards">
+                        <div class="portal-card" data-portal="employee">
+                            <div class="card-icon">👨‍👩‍👧‍👦</div>
+                            <h4>Employee Portal</h4>
+                            <p>Apply for child care assistance and manage your enrollment</p>
+                            <button class="btn btn-primary">Access Employee Portal</button>
+                        </div>
+
+                        <div class="portal-card" data-portal="employer">
+                            <div class="card-icon">🏢</div>
+                            <h4>Employer Dashboard</h4>
+                            <p>Manage company participation and employee benefits</p>
+                            <button class="btn btn-primary">Access Employer Dashboard</button>
+                        </div>
+
+                        <div class="portal-card" data-portal="provider">
+                            <div class="card-icon">🏫</div>
+                            <h4>Child Care Provider</h4>
+                            <p>Enroll in the system and submit billing</p>
+                            <button class="btn btn-primary">Access Provider Portal</button>
+                        </div>
+
+                        <div class="portal-card" data-portal="admin">
+                            <div class="card-icon">⚙️</div>
+                            <h4>Admin Dashboard</h4>
+                            <p>Manage applications, approvals, and reporting</p>
+                            <button class="btn btn-primary">Access Admin Dashboard</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h4>Tri-Share Program</h4>
+                            <p>Three sources of funding:</p>
+                            <ul>
+                                <li>SDC funds</li>
+                                <li>Employer funds</li>
+                                <li>Employee funds</li>
+                            </ul>
+                        </div>
+                        <div class="info-card">
+                            <h4>Co-Share Program</h4>
+                            <p>Two sources of funding:</p>
+                            <ul>
+                                <li>Employer funds (percentage or flat fee)</li>
+                                <li>Employee funds</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employee Portal -->
+            <div id="employee-portal" class="page">
+                <div class="portal-header">
+                    <h2>Employee Portal</h2>
+                    <p>Apply for child care assistance and manage your enrollment</p>
+                </div>
+                <!-- Employee portal content will be loaded here -->
+            </div>
+
+            <!-- Employer Dashboard -->
+            <div id="employer-portal" class="page">
+                <div class="portal-header">
+                    <h2>Employer Dashboard</h2>
+                    <p>Manage company participation and employee benefits</p>
+                </div>
+                <!-- Employer portal content will be loaded here -->
+            </div>
+
+            <!-- Provider Portal -->
+            <div id="provider-portal" class="page">
+                <div class="portal-header">
+                    <h2>Child Care Provider Portal</h2>
+                    <p>Enroll in the system and submit billing</p>
+                </div>
+                <!-- Provider portal content will be loaded here -->
+            </div>
+
+            <!-- Admin Dashboard -->
+            <div id="admin-portal" class="page">
+                <div class="portal-header">
+                    <h2>Admin Dashboard</h2>
+                    <p>Manage applications, approvals, and reporting</p>
+                </div>
+                <!-- Admin portal content will be loaded here -->
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Northeast Indiana Early Childhood Coalition. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/employee.js"></script>
+    <script src="js/employer.js"></script>
+    <script src="js/provider.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
