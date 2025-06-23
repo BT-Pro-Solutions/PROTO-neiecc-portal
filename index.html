@@ -27,35 +27,59 @@
                     <p>Supporting families and employers with affordable child care solutions</p>
                 </div>
 
+                <div class="lookup-section">
+                    <div class="lookup-cards">
+                        <div class="lookup-card">
+                            <div class="card-icon">🏫</div>
+                            <h4>Participating Childcare Provider Lookup</h4>
+                            <p>Find participating child care providers in your area</p>
+                            <div class="lookup-form">
+                                <input type="text" placeholder="Enter city or zip code" class="form-control lookup-input">
+                                <button class="btn btn-secondary" onclick="window.app.searchProviders()">Search Providers</button>
+                            </div>
+                        </div>
+
+                        <div class="lookup-card">
+                            <div class="card-icon">🏢</div>
+                            <h4>Participating Employer Lookup</h4>
+                            <p>Check if your employer participates in the program</p>
+                            <div class="lookup-form">
+                                <input type="text" placeholder="Enter company name" class="form-control lookup-input">
+                                <button class="btn btn-secondary" onclick="window.app.searchEmployers()">Search Employers</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="portal-selection">
                     <h3>Select Your Portal</h3>
                     <div class="portal-cards">
                         <div class="portal-card" data-portal="employee">
                             <div class="card-icon">👨‍👩‍👧‍👦</div>
-                            <h4>Employee Portal</h4>
+                            <h4>Family Login</h4>
                             <p>Apply for child care assistance and manage your enrollment</p>
-                            <button class="btn btn-primary">Access Employee Portal</button>
+                            <button class="btn btn-primary">Access Family Portal</button>
                         </div>
 
                         <div class="portal-card" data-portal="employer">
                             <div class="card-icon">🏢</div>
-                            <h4>Employer Dashboard</h4>
+                            <h4>Employer Login</h4>
                             <p>Manage company participation and employee benefits</p>
-                            <button class="btn btn-primary">Access Employer Dashboard</button>
+                            <button class="btn btn-primary">Access Employer Portal</button>
                         </div>
 
                         <div class="portal-card" data-portal="provider">
                             <div class="card-icon">🏫</div>
-                            <h4>Child Care Provider</h4>
+                            <h4>Child Care Provider Login</h4>
                             <p>Enroll in the system and submit billing</p>
                             <button class="btn btn-primary">Access Provider Portal</button>
                         </div>
 
                         <div class="portal-card" data-portal="admin">
                             <div class="card-icon">⚙️</div>
-                            <h4>Admin Dashboard</h4>
+                            <h4>Admin Login</h4>
                             <p>Manage applications, approvals, and reporting</p>
-                            <button class="btn btn-primary">Access Admin Dashboard</button>
+                            <button class="btn btn-primary">Access Admin Portal</button>
                         </div>
                     </div>
                 </div>

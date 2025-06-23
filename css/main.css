@@ -9,7 +9,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
     color: #333;
-    background-color: #f8f9fa;
+    background-color: #dff2f3;
 }
 
 .container {
@@ -20,7 +20,7 @@ body {
 
 /* Header Styles */
 .header {
-    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    background: linear-gradient(135deg, #92278f 0%, #417F81 100%);
     color: white;
     padding: 1rem 2rem;
     display: flex;
@@ -96,6 +96,140 @@ body {
     margin: 0 auto;
 }
 
+/* Lookup Section */
+.lookup-section {
+    margin: 3rem 0;
+}
+
+.lookup-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.lookup-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.lookup-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+}
+
+.lookup-card h4 {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.lookup-card p {
+    color: #7f8c8d;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.lookup-form {
+    display: flex;
+    gap: 0.5rem;
+    flex-direction: column;
+}
+
+.lookup-input {
+    margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .lookup-form {
+        flex-direction: row;
+    }
+    
+    .lookup-input {
+        margin-bottom: 0;
+        flex: 1;
+    }
+}
+
+/* Provider Settings Styles */
+.contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.contact-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 2px solid #ecf0f1;
+}
+
+.contact-card h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.rates-settings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.rate-setting {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 2px solid #ecf0f1;
+}
+
+.rate-setting label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.setting-group {
+    margin-bottom: 1rem;
+}
+
+.setting-description {
+    margin-top: 0.5rem;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+/* Search Results */
+.search-result {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #417F81;
+}
+
+.search-result h4 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.search-result p {
+    margin-bottom: 0.5rem;
+    color: #555;
+}
+
+.search-result:last-child {
+    margin-bottom: 0;
+}
+
 .portal-selection h3 {
     text-align: center;
     font-size: 1.8rem;
@@ -156,22 +290,22 @@ body {
 }
 
 .btn-primary {
-    background-color: #3498db;
+    background-color: #92278f;
     color: white;
 }
 
 .btn-primary:hover {
-    background-color: #2980b9;
+    background-color: #7a1d77;
     transform: translateY(-2px);
 }
 
 .btn-secondary {
-    background-color: #95a5a6;
+    background-color: #ff870f;
     color: white;
 }
 
 .btn-secondary:hover {
-    background-color: #7f8c8d;
+    background-color: #e6780d;
 }
 
 .btn-success {
@@ -266,7 +400,7 @@ body {
     color: #2c3e50;
     margin-bottom: 1.5rem;
     font-size: 1.4rem;
-    border-bottom: 2px solid #3498db;
+    border-bottom: 2px solid #417F81;
     padding-bottom: 0.5rem;
 }
 
@@ -283,7 +417,8 @@ body {
 
 .form-group input,
 .form-group select,
-.form-group textarea {
+.form-group textarea,
+.form-control {
     width: 100%;
     padding: 0.75rem;
     border: 2px solid #ecf0f1;
@@ -294,9 +429,10 @@ body {
 
 .form-group input:focus,
 .form-group select:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-control:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: #92278f;
 }
 
 .form-row {
@@ -389,7 +525,7 @@ body {
 .dashboard-number {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #3498db;
+    color: #417F81;
     margin-bottom: 0.5rem;
 }
 
@@ -468,7 +604,7 @@ body {
 }
 
 .badge-primary {
-    background-color: #3498db;
+    background-color: #417F81;
     color: white;
 }
 
@@ -495,7 +631,7 @@ body {
     padding: 1rem;
     background: #f8f9fa;
     border-radius: 8px;
-    border-left: 4px solid #3498db;
+    border-left: 4px solid #417F81;
 }
 
 .activity-icon {
@@ -641,7 +777,7 @@ body {
 .participation-fill,
 .capacity-fill {
     height: 100%;
-    background-color: #3498db;
+    background-color: #417F81;
     transition: width 0.3s ease;
 }
 
@@ -690,7 +826,7 @@ body {
 .impact-number {
     font-size: 2rem;
     font-weight: 700;
-    color: #3498db;
+    color: #417F81;
     margin: 1rem 0;
 }
 
@@ -825,7 +961,7 @@ body {
 .breakdown-total {
     font-weight: 700;
     font-size: 1.1rem;
-    border-top: 2px solid #3498db;
+    border-top: 2px solid #417F81;
     padding-top: 0.5rem;
     margin-top: 0.5rem;
 }
@@ -850,7 +986,7 @@ body {
 
 .alert-info {
     background-color: #e3f2fd;
-    border-left-color: #3498db;
+    border-left-color: #417F81;
 }
 
 .alert h4 {
@@ -916,7 +1052,7 @@ body {
 .metric-value {
     font-size: 2rem;
     font-weight: 700;
-    color: #3498db;
+    color: #417F81;
     margin-bottom: 0.5rem;
 }
 
@@ -942,7 +1078,7 @@ body {
 
 .chart-bar {
     flex: 1;
-    background-color: #3498db;
+    background-color: #417F81;
     border-radius: 2px 2px 0 0;
     min-height: 10%;
 }
@@ -981,7 +1117,7 @@ body {
 }
 
 .process-step.active {
-    border-color: #3498db;
+    border-color: #417F81;
     background-color: #f8fbff;
 }
 
@@ -1003,7 +1139,7 @@ body {
 }
 
 .process-step.active .step-number {
-    background-color: #3498db;
+    background-color: #417F81;
 }
 
 .step-content h4 {
@@ -1056,7 +1192,7 @@ body {
 }
 
 .upload-box:hover {
-    border-color: #3498db;
+    border-color: #417F81;
 }
 
 .upload-icon {
